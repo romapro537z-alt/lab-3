@@ -1,0 +1,10 @@
+//Правило 1
+MATCH (s:Student)-[:учится_в]->(g:Group)-[:изучает_предмет]->(c:Course)
+MERGE (s)-[r:изучает_предмет]->(c)
+RETURN s, r, c;
+//Правило 2
+MATCH (g:Group)-[:имеет_куратора]->(t:Teacher), (s:Student)-[:учится_в]->(g)
+MERGE (t)-[r:курирует_студента]->(s)
+RETURN t, r, s;
+//Итоговая база со всеми связями
+MATCH (n)-[r]->(m) RETURN n, r, m;
